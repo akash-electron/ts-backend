@@ -1,6 +1,6 @@
 {
   "name": "@akash-electron/ts-backend",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A robust, scalable, and production-ready starter template for building Node.js backends with TypeScript. This boilerplate follows industry best practices for architecture, error handling, and type safety.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
