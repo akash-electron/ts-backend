@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import { morganStream } from "./config/logger";
 import { globalErrorHandler } from "./middlewares/errorMiddleware";
 import { AppError } from "./utils/AppError";
 
@@ -10,10 +11,9 @@ const app = express();
 // Security HTTP headers
 app.use(helmet());
 
-// Development logging
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
-}
+// HTTP request logging via Morgan -> Winston
+const morganFormat = process.env.NODE_ENV === "development" ? "dev" : "combined";
+app.use(morgan(morganFormat, { stream: morganStream }));
 
 // Body parser
 app.use(express.json({ limit: "10kb" }));
