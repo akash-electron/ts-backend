@@ -10,7 +10,10 @@
   "files": [
     "dist",
     "src",
-    "bin"
+    "bin",
+    "tsconfig.json",
+    ".env.example",
+    ".gitignore"
   ],
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
