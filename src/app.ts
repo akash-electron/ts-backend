@@ -30,7 +30,7 @@ app.get("/health", (req, res) => {
 });
 
 // Handle undefined routes
-app.all("*", (req, res, next) => {
+app.all("/{*splat}", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
