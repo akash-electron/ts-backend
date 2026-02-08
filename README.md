@@ -1,7 +1,7 @@
 ## 📦 Installation
 
 ```bash
-npx install @akash-electron/ts-backend
+npx install @akash-electron/ts-backend@latest
 ```
 
 ## 🚀 Usage
