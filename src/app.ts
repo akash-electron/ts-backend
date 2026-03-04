@@ -1,18 +1,19 @@
 import cors from "cors";
-import express from "express";
+import express, { Application } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { morganStream } from "./config/logger";
 import { globalErrorHandler } from "./middlewares/errorMiddleware";
 import { AppError } from "./utils/AppError";
 
-const app = express();
+const app: Application = express();
 
 // Security HTTP headers
 app.use(helmet());
 
 // HTTP request logging via Morgan -> Winston
-const morganFormat = process.env.NODE_ENV === "development" ? "dev" : "combined";
+const morganFormat =
+  process.env.NODE_ENV === "development" ? "dev" : "combined";
 app.use(morgan(morganFormat, { stream: morganStream }));
 
 // Body parser
@@ -30,7 +31,7 @@ app.get("/health", (req, res) => {
 });
 
 // Handle undefined routes
-app.all("/{*splat}", (req, res, next) => {
+app.all("*path", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 

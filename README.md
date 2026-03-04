@@ -1,117 +1,63 @@
-## 📦 Installation
+## 🚀 Quick Start
+
+Initialize your new TypeScript backend project in seconds:
 
 ```bash
-npx install @akash-electron/ts-backend@latest
+# Create a new project in the current directory
+npx @akash-electron/ts-backend .
+
+# OR create a new project in a new folder
+npx @akash-electron/ts-backend my-backend-api
 ```
 
-## 🚀 Usage
+## 📦 What's Included?
 
-This package provides a set of utilities and middlewares to build robust TypeScript backends.
+This package is a full-featured boilerplate generator that sets up:
 
-### Global Error Handling
-
-```typescript
-import express from "express";
-import {
-  globalErrorHandler,
-  AppError,
-  catchAsync,
-} from "@akash-electron/ts-backend";
-
-const app = express();
-
-// Your routes
-app.get(
-  "/example",
-  catchAsync(async (req, res) => {
-    if (!req.query.id) {
-      throw new AppError("ID is required", 400);
-    }
-    res.json({ id: req.query.id });
-  }),
-);
-
-// Use the global error handler at the end
-app.use(globalErrorHandler);
-```
+- **TypeScript** pre-configured for Node.js
+- **Express 5** for modern routing
+- **Zod** for schema validation
+- **Winston & Morgan** for structured logging
+- **CatchAsync & AppError** for clean, centralized error handling
+- **Security** with `helmet` and `cors`
+- **Developer Experience** with `nodemon` and `ts-node`
 
 ---
 
-## 📂 Folder Structure (Inherited)
+## 📂 Project Structure
 
 ```text
 src/
-├── config/             # Configuration files (env vars, database, etc.)
-├── controllers/        # Request handlers (processes input/output)
-├── middlewares/        # Custom Express middlewares (error, auth, validation)
-├── models/             # Data models/schemas (Prisma/Mongoose)
-├── routes/             # API route definitions
-├── services/           # Business logic (kept separate from controllers)
-├── utils/              # Helper functions and utility classes
-├── validations/        # Request validation schemas (Zod)
-├── types/              # Global TypeScript interfaces & types
-├── app.ts              # Express application configuration
-└── server.ts           # Entry point and server initialization
+├── config/             # Env vars, database, and logger config
+├── controllers/        # Request/Response logic
+├── middlewares/        # Error handlers, auth, etc.
+├── models/             # Data schemas
+├── routes/             # API endpoints
+├── services/           # Business logic
+├── utils/              # Global helpers (AppError, catchAsync)
+├── validations/        # Zod validation schemas
+├── types/              # TS interface definitions
+├── app.ts              # Express setup
+└── server.ts           # Server entry point
 ```
 
----
+## 🛠️ Usage Post-Initialization
 
-## 🛠️ Key Components & Implementation
+Once you run the initialization command:
 
-### 1. Global Error Handling
-
-We use a centralized error handling mechanism to ensure consistent error responses across the entire application.
-
-- **`AppError` Class**: A custom error class to handle operational errors.
-- **`catchAsync` Utility**: A wrapper to eliminate the need for `try-catch` blocks in controllers.
-- **Global Error Middleware**: The final destination for all errors.
-
-### 2. Request Validation
-
-Using **Zod** for schema validation ensures that only valid data reaches your business logic. We validate:
-
-- Request Body
-- Query Parameters
-- URL Parameters
-
-### 3. Business Logic (Services)
-
-Controllers should only handle requests and responses. All "heavy lifting" and business rules are encapsulated in **Services**, making the code testable and reusable.
-
-### 4. Consistent API Responses
-
-All successful responses follow a standard format:
-
-```json
-{
-  "status": "success",
-  "data": { ... }
-}
-```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (v18+)
-- npm or pnpm
-
-### Initial Setup
-
-1. **Initialize Project**
-
+1. **Install Dependencies**
    ```bash
-   npm init -y
-   npm install typescript ts-node nodemon @types/node @types/express express dotenv
-   npx tsc --init
+   npm install
    ```
-
-2. **Install Essentials**
+2. **Setup Environment**
+   Rename `.env.example` to `.env` and configure your variables.
+3. **Run in Development**
    ```bash
-   npm install zod cors helmet morgan winston
-   npm install -D @types/cors @types/morgan
+   npm run dev
+   ```
+4. **Build for Production**
+   ```bash
+   npm run build
    ```
 
 ---
